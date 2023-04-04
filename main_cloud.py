@@ -31,7 +31,7 @@ image_list =[]
 
 
 # get the path/directory
-folder_dir = r"\split"
+folder_dir = "\split"
 for images in os.listdir(folder_dir):
     # check if the image ends with png
     if (images.endswith(".png")):
