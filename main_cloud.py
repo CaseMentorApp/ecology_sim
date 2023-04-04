@@ -52,7 +52,7 @@ for file in image_list:
 sim1_plants = []
 
 # get the path/directory
-folder_dir = r"\simulation_1_plants"
+folder_dir = './simulation_1_plants'
 for images in os.listdir(folder_dir):
  
     # check if the image ends with png
@@ -70,7 +70,7 @@ with planet:
             with st.expander(str(image)[:-4]):
                 col1, col2 = st.columns([3,1])
                 with col1:
-                    with Image.open(r"\simulation_1_plants\\" + image) as img:
+                    with Image.open('./simulation_1_plants/' + image) as img:
                         st.image(img)
                 with col2:
                     if st.button('Add', key= str(image)[:-4]):
