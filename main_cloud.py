@@ -132,6 +132,7 @@ with left:
 
 
 with right:
+    st.write('')
     st.button('Submit')
     col_lst = ["Altitude:","Tempeture","Wind Speed:","Soil PH:","Air Pressure:","Cloud Height:","Sunlight Hours:"]
     parameters = [str(for_refrence['alt'][clicked]) if clicked > -1 else "Please choose an ecosystem",
