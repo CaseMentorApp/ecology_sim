@@ -8,12 +8,23 @@ import pandas as pd
 import glob, os
 import re
 from split_image import split_image
+from streamlit_modal import Modal
+
+modal = Modal(key="Demo Key",title="test")
 
 def make_bar_style(x):
     if '%' in str(x):
         x = float(x.strip('%'))
         return f"background: linear-gradient(90deg,#5fba7d {x}%, transparent {x}%); width: 10em"  
     return ''
+
+def check_if_equal(list_1, list_2):
+    """ Check if both the lists are of same length and if yes then compare
+    sorted versions of both the list to check if both of them are equal
+    i.e. contain similar elements with same frequency. """
+    if len(list_1) != len(list_2):
+        return False
+    return sorted(list_1) == sorted(list_2)
 
 st.set_page_config(layout="wide", page_title="Ecosystem_Management_Simulation")
 
@@ -25,7 +36,7 @@ div.stButton > button:first-child {
 }
 </style>""", unsafe_allow_html=True)
 
-for_refrence = pd.read_csv("for_refrence.csv")
+for_refrence = pd.read_csv("./simulation_1/for_refrence.csv")
 
 
 numbers = re.compile(r'(\d+)')
@@ -33,7 +44,7 @@ image_list =[]
 
 
 # get the path/directory
-folder_dir = "./split"
+folder_dir = "./simulation_1/split_photo"
 for images in os.listdir(folder_dir):
     # check if the image ends with png
     if (images.endswith(".png")):
@@ -47,19 +58,29 @@ image_list = sorted(image_list, key=numericalSort)
 
 real_img_list = []
 for file in image_list:
-    with open("./split//" + file, "rb") as image:
+    with open("./simulation_1/split_photo//" + file, "rb") as image:
         encoded = base64.b64encode(image.read()).decode()
         real_img_list.append(f"data:image/jpeg;base64,{encoded}")
 
 sim1_plants = []
-
+sim1_animal = []
+# if 'sim1_plants' not in st.session_state:
+#             st.session_state['sim1_plants'] = []
+# if 'sim1_animal' not in st.session_state:
+#             st.session_state['sim1_animal'] = []
 # get the path/directory
-folder_dir = './simulation_1_plants'
+folder_dir = './simulation_1/plants'
 for images in os.listdir(folder_dir):
  
     # check if the image ends with png
     if (images.endswith(".png")):
-        sim1_plants.append(images)
+       sim1_plants.append(images)
+ # get the path/directory
+folder_dir_animal = './simulation_1/animals'
+for images in os.listdir(folder_dir_animal):
+    # check if the image ends with png
+    if (images.endswith(".png")):
+        sim1_animal.append(images)       
 
 if 'list' not in st.session_state:
     st.session_state['list'] = []
@@ -72,14 +93,26 @@ with planet:
             with st.expander(str(image)[:-4]):
                 col1, col2 = st.columns([3,1])
                 with col1:
-                    with Image.open('./simulation_1_plants/' + image) as img:
+                    with Image.open('./simulation_1/plants/' + image) as img:
                         st.image(img)
                 with col2:
                     if st.button('Add', key= str(image)[:-4]):
-                        if str(image)[:-4] not in st.session_state.list:
-                            st.session_state.list.append(str(image)[:-4])
+                        if len(st.session_state.list) < 8 :
+                            if str(image)[:-4] not in st.session_state.list:
+                                st.session_state.list.append(str(image)[:-4])
 
-
+with animal:
+        for image in sim1_animal:
+            with st.expander(str(image)[:-4]):
+                col1, col2 = st.columns([3,1])
+                with col1:
+                    with Image.open('./simulation_1/animals/' + image) as img:
+                        st.image(img)
+                with col2:
+                    if st.button('Add', key= str(image)[:-4]):
+                        if len(st.session_state.list) < 8 :
+                            if str(image)[:-4] not in st.session_state.list:
+                                st.session_state.list.append(str(image)[:-4])
 
 # with planet:
 #     with col2:
@@ -127,25 +160,62 @@ with left:
     )
 
 
+col_lst = ["Altitude:","Tempeture","Wind Speed:","Soil PH:","Air Pressure:","Cloud Height:","Sunlight Hours:"]
+parameters = [str(for_refrence['alt'][clicked]) if clicked > -1 else "Please choose an ecosystem",
+            str(for_refrence['temp'][clicked]) if clicked > -1 else "",
+            str(for_refrence['wind'][clicked]) if clicked > -1 else "",
+            str(for_refrence['ph'][clicked]) if clicked > -1 else "",
+            str(for_refrence['pressure'][clicked]) if clicked > -1 else "",
+            str(for_refrence['cloud'][clicked]) if clicked > -1 else "",
+            str(for_refrence['sunlight'][clicked]) if clicked > -1 else ""]
+data = {"Conditions": col_lst,
+        "": parameters}
+
+True_species1 = ['Fairy Inkcap',
+'Scarlet Star',
+'Tree Fern',
+'Striped Skunk',
+'Lowland Paca',
+'Red Acouchi',
+'Crab-eating Fox',
+'Pygmy Brocket'
+]
+True_species2 = ['Fairy Inkcap',
+'Scarlet Star',
+'Tree Fern',
+'Striped Skunk',
+'Lowland Paca',
+'Red Acouchi',
+'Crab-eating Fox',
+'Merida Brocket'
+]
+
+optimal_alt =[201,680]
+optimal_temp =[29.6,32]
+optimal_wind =[1,9]
+optimal_ph =[4.5,6]
 
 
-
+#logical tests
+if parameters[0] != "Please choose an ecosystem":
+    altitude = (float(parameters[0]) >= optimal_alt[0])  & (float(parameters[0]) <= optimal_alt[1])
+    temp = (float(parameters[1]) >= optimal_temp[0])  & (float(parameters[1]) <= optimal_temp[1])
+    wind = (float(parameters[2]) >= optimal_wind[0])  & (float(parameters[2]) <= optimal_wind[1])
+    ph = (float(parameters[3]) >= optimal_ph[0])  & (float(parameters[3]) <= optimal_ph[1])
 
 with right:
     st.write('')
     st.write('')
     st.write('')
-    st.button('Submit')
-    col_lst = ["Altitude:","Tempeture","Wind Speed:","Soil PH:","Air Pressure:","Cloud Height:","Sunlight Hours:"]
-    parameters = [str(for_refrence['alt'][clicked]) if clicked > -1 else "Please choose an ecosystem",
-                  str(for_refrence['temp'][clicked]) if clicked > -1 else "",
-                  str(for_refrence['wind'][clicked]) if clicked > -1 else "",
-                  str(for_refrence['ph'][clicked]) if clicked > -1 else "",
-                  str(for_refrence['pressure'][clicked]) if clicked > -1 else "",
-                  str(for_refrence['cloud'][clicked]) if clicked > -1 else "",
-                  str(for_refrence['sunlight'][clicked]) if clicked > -1 else ""]
-    data = {"Conditions": col_lst,
-        "": parameters}
+    if st.button('Submit'):
+        if ((check_if_equal(st.session_state.list,True_species1)) | (check_if_equal(st.session_state.list,True_species2))) & (altitude & temp & wind & ph):
+            with modal.container():
+                st.markdown('Congratulations your Ecosystem is sustainable')
+        else:
+          with modal.container():
+                st.markdown('Oh no! your Ecosystem is Not sustainable')  
+            
+
     df = pd.DataFrame(data)
     hide_table_row_index = """
             <style>
