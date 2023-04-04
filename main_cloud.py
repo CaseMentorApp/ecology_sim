@@ -208,7 +208,10 @@ with right:
     st.write('')
     st.write('')
     if st.button('Submit'):
-        if ((check_if_equal(st.session_state.list,True_species1)) | (check_if_equal(st.session_state.list,True_species2))) & (altitude & temp & wind & ph):
+        if parameters[0] == "Please choose an ecosystem":
+            with modal.container():
+                st.markdown('Please choose an ecosystem')
+        elif ((check_if_equal(st.session_state.list,True_species1)) | (check_if_equal(st.session_state.list,True_species2))) & (altitude & temp & wind & ph):
             with modal.container():
                 st.markdown('Congratulations your Ecosystem is sustainable')
         else:
