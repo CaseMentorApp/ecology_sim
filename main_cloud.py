@@ -27,9 +27,6 @@ div.stButton > button:first-child {
 
 for_refrence = pd.read_csv("for_refrence.csv")
 
-st.markdown("<h2 style='text-align: left; color: grey;'>Ecosystem Management - Simulation 1</h2>", unsafe_allow_html=True)
-st.markdown('---')
-st.button('Submit')
 
 numbers = re.compile(r'(\d+)')
 image_list =[]
@@ -93,6 +90,8 @@ with planet:
 
 left, right = st.columns([3.5,1])
 with left:  
+    st.markdown("<h2 style='text-align: left; color: grey;'>Ecosystem Management - Simulation 1</h2>", unsafe_allow_html=True)
+    st.markdown('---')
     st.markdown("<h4 style='text-align: left; color: grey;'>Instructions</h4>", unsafe_allow_html=True)
     st.caption("""Move through the cells of the map with your mouse and read the comments for the environmental conditions associated with the cell.
                 Once you find a cell to place your ecosystem, click on it to select the cell. The relevant conditions will now appear on the top-right menu.""")
@@ -133,7 +132,7 @@ with left:
 
 
 with right:
-
+    st.button('Submit')
     col_lst = ["Altitude:","Tempeture","Wind Speed:","Soil PH:","Air Pressure:","Cloud Height:","Sunlight Hours:"]
     parameters = [str(for_refrence['alt'][clicked]) if clicked > -1 else "Please choose an ecosystem",
                   str(for_refrence['temp'][clicked]) if clicked > -1 else "",
