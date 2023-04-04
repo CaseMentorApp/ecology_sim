@@ -45,7 +45,7 @@ image_list = sorted(image_list, key=numericalSort)
 
 real_img_list = []
 for file in image_list:
-    with open("\split\\" + file, "rb") as image:
+    with open("./split//" + file, "rb") as image:
         encoded = base64.b64encode(image.read()).decode()
         real_img_list.append(f"data:image/jpeg;base64,{encoded}")
 
