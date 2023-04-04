@@ -9,6 +9,11 @@ import glob, os
 import re
 from split_image import split_image
 
+def make_bar_style(x):
+    if '%' in str(x):
+        x = float(x.strip('%'))
+        return f"background: linear-gradient(90deg,#5fba7d {x}%, transparent {x}%); width: 10em"  
+    return ''
 
 st.set_page_config(layout="wide", page_title="Ecosystem_Management_Simulation")
 
@@ -147,23 +152,58 @@ with right:
             </style>
             """
 
-    # Inject CSS with Markdown
+    #Inject CSS with Markdown
     st.markdown(hide_table_row_index, unsafe_allow_html=True)
-    st.table(df)
+    #style
+    th_props = [
+        ('font-size', '14px'),
+        ('text-align', 'center'),
+        ('font-weight', 'bold'),
+        ('color', '#6d6d6d'),
+        ('background-color', '#f7ffff')
+        ]
+                                    
+    td_props = [
+        ('font-size', '13px'),
+        ('color', '#6d6d6d')
+        ]
+                                    
+    styles = [
+        dict(selector="th", props=th_props),
+        dict(selector="td", props=td_props)
+        ]
+
+    # table
+    df2=df.style.set_properties(**{'text-align': 'left'}).set_table_styles(styles)
+    st.table(df2)
 
 with right:
-    st.markdown('---')
-    st.markdown("<h5 style='text-align: left; color: grey;'>Selected Species</h5>", unsafe_allow_html=True)
+    # st.markdown('---')
+    st.markdown("<h5 style='text-align: left; color: grey;'>Selected Species " + str(len(st.session_state.list)) + "/8</h5>", unsafe_allow_html=True)
+
     col3, col4 = st.columns([2,1])
     with col4:
         for i in st.session_state.list:
                 if st.button('Del', key = i + "del"):
                     st.session_state.list.remove(i)
     with col3:
+        # for i in range(len(st.session_state.list)):
+        #     st.markdown(st.session_state.list[i])
+        df_species =pd.DataFrame(['Add Species']*8)
         for i in range(len(st.session_state.list)):
-            st.markdown(st.session_state.list[i])
-
-
+            df_species[0][i] = st.session_state.list[i]
+        td_props = [
+        ('font-size', '15px'),
+        ('color', '#6d6d6d')
+        ]
+        styles = [
+        dict(selector="th", props=th_props),
+        dict(selector="td", props=td_props)
+        ]
+        style = df_species.style.hide_index().set_properties(**{'text-align': 'left'}).set_table_styles(styles)
+        style.hide_columns()
+        st.write(style.to_html(), unsafe_allow_html=True)
+        
 
 
 
