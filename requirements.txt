@@ -4,3 +4,4 @@ split-image==2.0.1
 st-clickable-images==0.0.3
 regex==2023.3.23
 pillow==9.5.0
+streamlit-modal==0.1.0
