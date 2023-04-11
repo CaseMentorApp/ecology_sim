@@ -81,6 +81,20 @@ div.stButton > button:first-child {
 }
 </style>""", unsafe_allow_html=True)
 
+
+st.markdown("""
+
+<style>
+
+
+ .css-9s5bis {
+        display: none;
+    }
+
+</style>
+
+""", unsafe_allow_html=True)
+
 for_refrence = pd.read_csv("./simulation_1/for_refrence.csv")
 
 
@@ -98,11 +112,13 @@ for images in os.listdir(folder_dir):
 
 image_list = sorted(image_list, key=numericalSort)
 
-real_img_list = []
-for file in image_list:
-    with open("./simulation_1/split_photo//" + file, "rb") as image:
-        encoded = base64.b64encode(image.read()).decode()
-        real_img_list.append(f"data:image/jpeg;base64,{encoded}")
+if 'real_img_list' not in st.session_state:
+    st.session_state['real_img_list'] = []
+    for file in image_list:
+        with open("./simulation_1/split_photo//" + file, "rb") as image:
+            encoded = base64.b64encode(image.read()).decode()
+            st.session_state['real_img_list'].append(f"data:image/jpeg;base64,{encoded}")
+
 
 sim1_plants = []
 sim1_animal = []
@@ -134,15 +150,17 @@ conditions_container = st.container()
 species_container = st.container()
 sub_container = st.container()
 
+if 'animals' not in st.session_state:
+    st.session_state['animals'] = sim1_animal
 
-
-
+if 'plants' not in st.session_state:
+    st.session_state['plants'] = sim1_plants
 
 with st.sidebar:
-    planet, animal = st.tabs(['plants','animals'])
+    planet, animal = st.tabs(['Producers','Animals'])
 
 with planet:
-        for image in sim1_plants:
+        for image in st.session_state['plants']:
                 col1, col2 = st.columns([3,1])
                 with col1:
                     with st.expander(str(image)[:-4]):
@@ -155,7 +173,7 @@ with planet:
                                 st.session_state.list.append(str(image)[:-4])
 
 with animal:
-        for image in sim1_animal:
+        for image in st.session_state['animals']:
                 col1, col2 = st.columns([3,1])
                 with col1:
                     with st.expander(str(image)[:-4]):
@@ -167,12 +185,7 @@ with animal:
                             if str(image)[:-4] not in st.session_state.list:
                                 st.session_state.list.append(str(image)[:-4])
 
-# with planet:
-#     with col2:
-#         for image in sim1_plants:
-#             if st.button('Add', key= str(image)[:-4]):
-#               if str(image)[:-4] not in st.session_state.list:
-#                 st.session_state.list.append(str(image)[:-4])             
+            
 
 left, right = st.columns([3.5,1])
 with left:  
@@ -181,15 +194,17 @@ with left:
     st.markdown("<h4 style='text-align: left; color: grey;'>Instructions</h4>", unsafe_allow_html=True)
     st.caption("""Move through the cells of the map with your mouse and read the comments for the environmental conditions associated with the cell.
                 Once you find a cell to place your ecosystem, click on it to select the cell. The relevant conditions will now appear on the top-right menu.""")
+  
+
     clicked = clickable_images(
-       real_img_list,
+    st.session_state['real_img_list'],
         titles=["Altitude:" + str(for_refrence['alt'][i]) +
-                 "\n" + "Temperture:" + str(for_refrence['temp'][i]) +
-                 "\n" + "Wind:" + str(for_refrence['wind'][i]) +
-                 "\n" + "Soil PH:" + str(for_refrence['ph'][i]) +
-                 "\n" + "Air Pressure:" + str(for_refrence['pressure'][i]) +                  
-                 "\n" + "Cloud Height:" + str(for_refrence['cloud'][i]) +
-                 "\n" + "Sunlight Hours:" + str(for_refrence['sunlight'][i]) for i in range(len(real_img_list))],
+                "\n" + "Temperture:" + str(for_refrence['temp'][i]) +
+                "\n" + "Wind:" + str(for_refrence['wind'][i]) +
+                "\n" + "Soil PH:" + str(for_refrence['ph'][i]) +
+                "\n" + "Air Pressure:" + str(for_refrence['pressure'][i]) +                  
+                "\n" + "Cloud Height:" + str(for_refrence['cloud'][i]) +
+                "\n" + "Sunlight Hours:" + str(for_refrence['sunlight'][i]) for i in range(len(st.session_state['real_img_list']))],
         div_style={"display": "flex", "justify-content": "center", "flex-wrap": "wrap"},
         img_style={"margin": "0.5px",
                     "width": "40px",
@@ -240,7 +255,8 @@ st.markdown(
 
 with right:
     # html(my_html)
-    submit = st.button('Submit')
+    
+    submit = st.button('Submit', type = 'primary')
     st.markdown("<h5 style='text-align: left; color: grey;'>Conditions </h5>", unsafe_allow_html=True)
     col_top_left,col_top_mid, col_top_right = st.columns([0.5,3,1.5])
     with col_top_left:
@@ -270,40 +286,9 @@ with right:
     for i in range(len(parameters)):       
         with col_top_right:
             st.caption(parameters[i])
-  
-        # df = pd.DataFrame(data)
-        # hide_table_row_index = """
-        #         <style>
-        #         thead tr th:first-child {display:none}
-        #         tbody th {display:none}
-        #         </style>
-                # """
 
 
-    # #Inject CSS with Markdown
-    #     st.markdown(hide_table_row_index, unsafe_allow_html=True)
-    # #style
-    #     th_props = [
-    #         ('font-size', '14px'),
-    #         ('text-align', 'center'),
-    #         ('font-weight', 'bold'),
-    #         ('color', '#6d6d6d'),
-    #         ('background-color', '#f7ffff')
-    #         ]
-                                        
-    #     td_props = [
-    #         ('font-size', '11px'),
-    #         ('color', '#6d6d6d')
-    #         ]
-                                        
-    #     styles = [
-    #         dict(selector="th", props=th_props),
-    #         dict(selector="td", props=td_props)
-    #         ]
 
-    # # table
-    #     df2=df.style.set_properties(**{'text-align': 'left'}).set_table_styles(styles)
-    #     st.table(df2)
 
 
 with right:
@@ -313,19 +298,7 @@ with right:
     for i in range(len(st.session_state.list)):
             df_species[0][i] = st.session_state.list[i]
 
-    # td_props = [
-    #     ('font-size', '12px'),
-    #     ('text-align', 'center'),
-    #     ('font-weight', 'bold'),
-    #     ('color', '#6d6d6d'),
-    #     ('background-color', '#f7ffff')
-    #     ]
-    # styles = [
-    #     dict(selector="th", props=th_props),
-    #     dict(selector="td", props=td_props)
-    #     ]
-    # df_species_style = df_species.style.hide_index().set_properties(**{'text-align': 'left'}).set_table_styles(styles)
-    # df_species_style.hide_columns()
+  
     for i in st.session_state.list:
             col3, col4 = st.columns([2,1])
             with col3:
@@ -357,3 +330,4 @@ with left:
             with modal.container():
                 st.markdown('Oh no! your Ecosystem is Not sustainable') 
             
+
