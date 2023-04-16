@@ -289,7 +289,7 @@ if authentication_status:
         st.markdown("<h5 style='text-align: left; color: grey;'>Selected Species " + str(len(st.session_state.list)) + "/8</h5>", unsafe_allow_html=True)
 
     # show each species selected and add a delete button, if the del button is pressed the species is removed from the list
-        for i in range(len(st.session_state.list)):
+        for i in range(8):
                 col3, col4 = st.columns([2,1])
                 with col4:
                     if st.button('Del', key = str(i) + "del"):
