@@ -53,7 +53,7 @@ authenticator = stauth.Authenticate(
 #hiding the multipage in the sidebar
 no_sidebar_style = """
     <style>
-       .css-m8hsoe {display: none;}
+       .css-79elbk {display: none;}
     </style>
 """
 
