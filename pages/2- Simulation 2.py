@@ -13,6 +13,7 @@ import re
 from split_image import split_image
 from streamlit_modal import Modal
 from datetime import datetime
+from streamlit_extras.switch_page_button import switch_page
 
 
 # defining the modal a component that is responsible for popup messages
@@ -49,7 +50,14 @@ authenticator = stauth.Authenticate(
     config['cookie']['expiry_days'],
     config['preauthorized']
 )
+#hiding the multipage in the sidebar
+no_sidebar_style = """
+    <style>
+       .css-m8hsoe {display: none;}
+    </style>
+"""
 
+st.markdown(no_sidebar_style, unsafe_allow_html=True)
 
 name, authentication_status, username = authenticator.login('Login', 'main')
 if authentication_status:
@@ -182,6 +190,19 @@ if authentication_status:
 
     #writing the headlins and instructions
     with left:  
+        multipage_1, multipage_2, multipage_3 = st.columns(3)
+        with multipage_1:
+            page1 = st.button("Simulation 1")
+            if page1:
+                switch_page("Simulation1")
+        with multipage_2:
+            page1 = st.button("Simulation 2")
+            if page1:
+                switch_page("Simulation 2")
+        with multipage_3:
+            page1 = st.button("Simulation 3")
+            if page1:
+                switch_page("Simulation 3")
         st.markdown("<h2 style='text-align: left; color: grey;'>Ecosystem Management - Simulation 2</h2>", unsafe_allow_html=True)
         st.markdown('---')
         st.markdown("<h4 style='text-align: left; color: grey;'>Instructions</h4>", unsafe_allow_html=True)
@@ -293,9 +314,9 @@ if authentication_status:
                         continue
 
         st.markdown('---')
-        if st.checkbox('Logout'):
-                st.error('Are you sure you would like to Logout?')
-                authenticator.logout('Logout','main') 
+        if st.checkbox('Log Out'):
+                st.error('Are you sure you would like to Log Out?')
+                authenticator.logout('Log Out','main') 
     # logical test to see if the parameters are in the right range
     if ((parameters[0] != "-") & (parameters[1] != "-") & (parameters[2] != "-") & (parameters[3] != "-")):
         altitude = (float(parameters[0]) >= optimal_alt[0])  & (float(parameters[0]) <= optimal_alt[1])
