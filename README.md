@@ -1,5 +1,5 @@
 
-<h1 align="center"><b>Ecology Simulator</b></h1>
+<h1><b>Ecology Simulator</b></h1>
 Ecology Simulator is a web app that simulates ecological situations through 3 simulations. The app includes a dashboard that presents the simulations and 
 
 
