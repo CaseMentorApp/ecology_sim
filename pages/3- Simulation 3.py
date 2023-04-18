@@ -352,10 +352,10 @@ if authentication_status:
             elif ((parameters[0] == "-") | (parameters[1] == "-") | (parameters[2] == "-") | (parameters[3] == "-")):
                 with incomplete.container():
                     st.markdown('Please make sure you have selected 8 species and the corresponding environmental conditions.')
-            elif len(st.session_state.list) < 8:
+            elif len(st.session_state.list3) < 8:
                 with incomplete.container():
                     st.markdown('Please make sure you have selected 8 species and the corresponding environmental conditions.')
-            elif ((check_if_equal(st.session_state.list,True_species1)) | (check_if_equal(st.session_state.list,True_species2))) & (altitude & temp & wind & ph):
+            elif ((check_if_equal(st.session_state.list3,True_species1)) | (check_if_equal(st.session_state.list3,True_species2)) | (check_if_equal(st.session_state.list3,True_species3))) & (altitude & temp & wind & ph):
                 with modal.container():
                     st.markdown('Congratulations your Ecosystem is sustainable')
                     st.balloons()
