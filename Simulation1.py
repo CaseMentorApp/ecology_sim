@@ -37,9 +37,15 @@ def numericalSort(value):
 # configuring the streamlit page layout as wide
 st.set_page_config(layout="wide", page_title="Ecosystem_Management_Simulation")
 
-
-# hashed_passwords = stauth.Hasher(['abc', 'def']).generate()
-
+# remove the top padding
+st.markdown(
+            f'''
+            <style>
+                .css-z5fcl4 {{
+                    padding-top: {1}rem;
+                }}
+            </style>
+            ''',unsafe_allow_html=True)
 
 with open('config.yaml') as file:
     config = yaml.load(file, Loader=SafeLoader)
@@ -180,7 +186,7 @@ if authentication_status:
     with left:
         multipage_1, multipage_2, multipage_3 = st.columns(3)
         with multipage_1:
-            page1 = st.button("Simulation 1")
+            page1 = st.button("Simulation 1", type = 'primary')
             if page1:
                 switch_page("Simulation1")
         with multipage_2:
@@ -206,7 +212,7 @@ if authentication_status:
     #  the width height and margin are very important in order to have correct image view(calculated by the width of the section divided by the number of columns)
         clicked = clickable_images(
         st.session_state['real_img_list'],
-            titles=["Altitude:" + str(for_refrence['alt'][i]) +
+            titles=["Elevation:" + str(for_refrence['alt'][i]) +
                     "\n" + "Temperture:" + str(for_refrence['temp'][i]) +
                     "\n" + "Wind:" + str(for_refrence['wind'][i]) +
                     "\n" + "Soil PH:" + str(for_refrence['ph'][i]) +
@@ -276,7 +282,7 @@ if authentication_status:
             
             # taking the parameters from the clicked image into the conditions part, limiting the condtions view to only 4 at a time
         with col_top_right:
-            col_lst = ["Altitude:","Tempeture","Wind Speed:","Soil PH:","Air Pressure:","Cloud Height:","Sunlight Hours:"]
+            col_lst = ["Elevation:","Tempeture","Wind Speed:","Soil PH:","Air Pressure:","Cloud Height:","Sunlight Hours:"]
             parameters = [str(for_refrence['alt'][clicked]) if clicked > -1 and check_alt and (sum(check_list) <= 4) else "-",
                     str(for_refrence['temp'][clicked]) if clicked > -1 and check_temp and (sum(check_list) <= 4) else "-",
                     str(for_refrence['wind'][clicked]) if clicked > -1 and check_wind and (sum(check_list) <= 4) else "-",
@@ -353,4 +359,3 @@ elif authentication_status == False:
 
 elif authentication_status == None:
     st.warning('Please enter your username and password')
-
