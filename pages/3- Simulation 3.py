@@ -37,8 +37,15 @@ def numericalSort(value):
 # configuring the streamlit page layout as wide
 st.set_page_config(layout="wide", page_title="Ecosystem_Management_Simulation")
 
-
-hashed_passwords = stauth.Hasher(['abc', 'def']).generate()
+# remove the top padding
+st.markdown(
+            f'''
+            <style>
+                .css-z5fcl4 {{
+                    padding-top: {1}rem;
+                }}
+            </style>
+            ''',unsafe_allow_html=True)
 
 
 with open('config.yaml') as file:
@@ -199,7 +206,7 @@ if authentication_status:
             if page1:
                 switch_page("Simulation 2")
         with multipage_3:
-            page1 = st.button("Simulation 3")
+            page1 = st.button("Simulation 3", type='primary')
             if page1:
                 switch_page("Simulation 3")
         st.markdown("<h2 style='text-align: left; color: grey;'>Ecosystem Management - Simulation 3</h2>", unsafe_allow_html=True)
@@ -215,7 +222,7 @@ if authentication_status:
     #  the width height and margin are very important in order to have correct image view(calculated by the width of the section divided by the number of columns)
         clicked = clickable_images(
         st.session_state['real_img_list3'],
-            titles=["Altitude:" + str(for_refrence['alt'][i]) +
+            titles=["Elevation:" + str(for_refrence['alt'][i]) +
                     "\n" + "Temperture:" + str(for_refrence['temp'][i]) +
                     "\n" + "Wind:" + str(for_refrence['wind'][i]) +
                     "\n" + "Soil PH:" + str(for_refrence['ph'][i]) +
@@ -293,7 +300,7 @@ if authentication_status:
             
             # taking the parameters from the clicked image into the conditions part, limiting the condtions view to only 4 at a time
         with col_top_right:
-            col_lst = ["Altitude:","Tempeture","Wind Speed:","Soil PH:","Air Pressure:","Cloud Height:","Sunlight Hours:"]
+            col_lst = ["Elevation:","Tempeture","Wind Speed:","Soil PH:","Air Pressure:","Cloud Height:","Sunlight Hours:"]
             parameters = [str(for_refrence['alt'][clicked]) if clicked > -1 and check_alt and (sum(check_list) <= 4) else "-",
                     str(for_refrence['temp'][clicked]) if clicked > -1 and check_temp and (sum(check_list) <= 4) else "-",
                     str(for_refrence['wind'][clicked]) if clicked > -1 and check_wind and (sum(check_list) <= 4) else "-",

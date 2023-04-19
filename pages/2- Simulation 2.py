@@ -37,7 +37,15 @@ def numericalSort(value):
 # configuring the streamlit page layout as wide
 st.set_page_config(layout="wide", page_title="Ecosystem_Management_Simulation")
 
-hashed_passwords = stauth.Hasher(['abc', 'def']).generate()
+# remove the top padding
+st.markdown(
+            f'''
+            <style>
+                .css-z5fcl4 {{
+                    padding-top: {1}rem;
+                }}
+            </style>
+            ''',unsafe_allow_html=True)
 
 
 with open('config.yaml') as file:
@@ -196,7 +204,7 @@ if authentication_status:
             if page1:
                 switch_page("Simulation1")
         with multipage_2:
-            page1 = st.button("Simulation 2")
+            page1 = st.button("Simulation 2", type='primary')
             if page1:
                 switch_page("Simulation 2")
         with multipage_3:
