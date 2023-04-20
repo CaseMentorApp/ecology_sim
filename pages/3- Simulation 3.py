@@ -80,6 +80,25 @@ if authentication_status:
     }
     </style>""", unsafe_allow_html=True)
 
+    button = st.markdown("""
+    <style>
+    .element-container.css-1biol9.e1tzin5v3:nth-of-type(1) button
+    {
+       border-color: rgb(255, 75, 75);
+    color: rgb(255, 255, 255);
+    background-color: rgb(255,75, 75);
+    }
+    </style>""", unsafe_allow_html=True)
+
+    sim_button = st.markdown("""
+    <style>
+    .css-firdtp
+    {
+       border-color: rgb(255, 75, 75);
+    color: rgb(255, 75, 75);
+    background-color: rgb(255,255, 255);
+    }
+    </style>""", unsafe_allow_html=True)
     # removing the side bar close button
     # st.markdown("""
 

@@ -81,7 +81,25 @@ if authentication_status:
         margin : 0px;
     }
     </style>""", unsafe_allow_html=True)
+    button = st.markdown("""
+    <style>
+    .element-container.css-1biol9.e1tzin5v3:nth-of-type(1) button
+    {
+       border-color: rgb(255, 75, 75);
+    color: rgb(255, 255, 255);
+    background-color: rgb(255,75, 75);
+    }
+    </style>""", unsafe_allow_html=True)
 
+    sim_button = st.markdown("""
+    <style>
+    .css-firdtp
+    {
+       border-color: rgb(255, 75, 75);
+    color: rgb(255, 75, 75);
+    background-color: rgb(255,255, 255);
+    }
+    </style>""", unsafe_allow_html=True)
     # removing the side bar close button
     st.markdown("""
 
@@ -335,6 +353,7 @@ if authentication_status:
     # the final test, checking the species and conditions, four diffrent answers using a pop up message
     incomplete = Modal(key="incomplete Key",title="Your ecosystem is incomplete")
     no_sus = Modal(key="no_sus Key",title="Your ecosystem is NOT sustainable")
+    success = Modal(key="Congrats! Key",title="Congrats!")
 
     with left:
         if submit:
@@ -348,8 +367,8 @@ if authentication_status:
                 with incomplete.container():
                     st.markdown('Please make sure you have selected 8 species and the corresponding environmental conditions.')
             elif ((check_if_equal(st.session_state.list2,True_species1)) | (check_if_equal(st.session_state.list2,True_species2))) & (altitude & temp & wind & ph):
-                with modal.container():
-                    st.markdown('Congratulations your Ecosystem is sustainable')
+                with success.container():
+                    st.markdown('Your ecosystem is sustainable.')
                     st.balloons()
             else:
                 with no_sus.container():
