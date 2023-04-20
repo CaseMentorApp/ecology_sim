@@ -350,6 +350,7 @@ if authentication_status:
     # the final test, checking the species and conditions, four diffrent answers using a pop up message 
     incomplete = Modal(key="incomplete Key",title="Your ecosystem is incomplete")
     no_sus = Modal(key="no_sus Key",title="Your ecosystem is NOT sustainable")
+    success = Modal(key="Congrats! Key",title="Congrats!")
 
     with left:
         if submit:
@@ -363,8 +364,8 @@ if authentication_status:
                 with incomplete.container():
                     st.markdown('Please make sure you have selected 8 species and the corresponding environmental conditions.')
             elif ((check_if_equal(st.session_state.list3,True_species1)) | (check_if_equal(st.session_state.list3,True_species2)) | (check_if_equal(st.session_state.list3,True_species3))) & (altitude & temp & wind & ph):
-                with modal.container():
-                    st.markdown('Congratulations your Ecosystem is sustainable')
+                with success.container():
+                    st.markdown('Your ecosystem is sustainable.')
                     st.balloons()
             else:
                 with no_sus.container():
