@@ -85,6 +85,7 @@ if authentication_status:
     .css-firdtp {
        border-color: rgb(255, 75, 75);
     color: rgb(255, 75, 75);
+    background-color: rgb(255, 255, 255);
     }
     </style>""", unsafe_allow_html=True)
    
