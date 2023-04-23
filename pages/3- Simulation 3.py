@@ -70,16 +70,7 @@ st.markdown(no_sidebar_style, unsafe_allow_html=True)
 name, authentication_status, username = authenticator.login('Login', 'main')
 if authentication_status:
     #styling the buttons
-    button_style = st.markdown("""
-    <style>
-    div.stButton > button:first-child {
-        text-align : center;
-        font-size:1px;
-        height : 20px;
-        margin : 0px;
-    }
-    </style>""", unsafe_allow_html=True)
-
+    #style for the submit button
     button = st.markdown("""
     <style>
     .element-container.css-1biol9.e1tzin5v3:nth-of-type(1) button
@@ -90,6 +81,29 @@ if authentication_status:
     }
     </style>""", unsafe_allow_html=True)
 
+    #style for the submit button when the side bar is closed
+    button_no_side = st.markdown("""
+    <style>
+    .element-container.css-1b6t8kw.e1tzin5v3:nth-of-type(1) button
+    {
+       border-color: rgb(255, 75, 75);
+    color: rgb(255, 255, 255);
+    background-color: rgb(255,75, 75);
+    }
+    </style>""", unsafe_allow_html=True)
+
+    # style for the buttons in general
+    button_style = st.markdown("""
+    <style>
+    div.stButton > button:first-child {
+        text-align : center;
+        font-size:1px;
+        height : 20px;
+        margin : 0px;
+    }
+    </style>""", unsafe_allow_html=True)
+
+    # style for the simulation 1-3 options button
     sim_button = st.markdown("""
     <style>
     .css-firdtp
@@ -98,20 +112,10 @@ if authentication_status:
     color: rgb(255, 75, 75);
     background-color: rgb(255,255, 255);
     }
+    .css-firdtp:hover {
+    background-color: rgb(255, 51, 51);
+    color: rgb(255, 255, 255);
     </style>""", unsafe_allow_html=True)
-    # removing the side bar close button
-    # st.markdown("""
-
-    # <style>
-
-
-    # .css-9s5bis {
-    #         display: none;
-    #     }
-
-    # </style>
-
-    # """, unsafe_allow_html=True)
 
     # creating a function to cache the read excel data
     @st.cache_data
