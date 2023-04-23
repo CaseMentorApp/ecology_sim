@@ -73,28 +73,6 @@ name, authentication_status, username = authenticator.login('Login', 'main')
 if authentication_status:
 
     #styling the buttons
-    #style for the submit button
-    button = st.markdown("""
-    <style>
-    .element-container.css-1biol9.e1tzin5v3:nth-of-type(1) button
-    {
-       border-color: rgb(255, 75, 75);
-    color: rgb(255, 255, 255);
-    background-color: rgb(255,75, 75);
-    }
-    </style>""", unsafe_allow_html=True)
-
-    #style for the submit button when the side bar is closed
-    button_no_side = st.markdown("""
-    <style>
-    .element-container.css-1b6t8kw.e1tzin5v3:nth-of-type(1) button
-    {
-       border-color: rgb(255, 75, 75);
-    color: rgb(255, 255, 255);
-    background-color: rgb(255,75, 75);
-    }
-    </style>""", unsafe_allow_html=True)
-
     # style for the buttons in general
     button_style = st.markdown("""
     <style>
@@ -119,7 +97,27 @@ if authentication_status:
     background-color: rgb(255, 51, 51);
     color: rgb(255, 255, 255);
     </style>""", unsafe_allow_html=True)
+    #style for the submit button
+    button = st.markdown("""
+    <style>
+    .element-container.css-1biol9.e1tzin5v3:nth-of-type(1) button
+    {
+       border-color: rgb(255, 75, 75);
+    color: rgb(255, 255, 255);
+    background-color: rgb(255,75, 75);
+    }
+    </style>""", unsafe_allow_html=True)
 
+    #style for the submit button when the side bar is closed
+    button_no_side = st.markdown("""
+    <style>
+    .element-container.css-1b6t8kw.e1tzin5v3:nth-of-type(1) button
+    {
+       border-color: rgb(255, 75, 75);
+    color: rgb(255, 255, 255);
+    background-color: rgb(255,75, 75);
+    }
+    </style>""", unsafe_allow_html=True)
     # creating a function to cache the read excel data
     @st.cache_data
     def load_file(path):
