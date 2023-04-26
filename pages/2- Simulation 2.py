@@ -348,7 +348,7 @@ if authentication_status:
                 st.error('Are you sure you would like to Log Out?')
                 authenticator.logout('Log Out','main') 
     # logical test to see if the parameters are in the right range
-    if ((parameters[0] != "-") & (parameters[1] != "-") & (parameters[2] != "-") & (parameters[3] != "-")):
+    if ((parameters[0] != "--") & (parameters[1] != "--") & (parameters[2] != "--") & (parameters[3] != "--")):
         altitude = (float(parameters[0]) >= optimal_alt[0])  & (float(parameters[0]) <= optimal_alt[1])
         temp = (float(parameters[1]) >= optimal_temp[0])  & (float(parameters[1]) <= optimal_temp[1])
         wind = (float(parameters[2]) >= optimal_wind[0])  & (float(parameters[2]) <= optimal_wind[1])
@@ -361,10 +361,10 @@ if authentication_status:
 
     with left:
         if submit:
-            if parameters[0] == "-":
+            if parameters[0] == "--":
                 with incomplete.container():
                     st.markdown('Please make sure you have selected 8 species and the corresponding environmental conditions.')
-            elif ((parameters[0] == "-") | (parameters[1] == "-") | (parameters[2] == "-") | (parameters[3] == "-")):
+            elif ((parameters[0] == "--") | (parameters[1] == "--") | (parameters[2] == "--") | (parameters[3] == "--")):
                 with incomplete.container():
                     st.markdown('Please make sure you have selected 8 species and the corresponding environmental conditions.')
             elif len(st.session_state.list2) < 8:
