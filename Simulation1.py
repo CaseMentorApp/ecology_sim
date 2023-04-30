@@ -37,12 +37,27 @@ def numericalSort(value):
 # configuring the streamlit page layout as wide
 st.set_page_config(layout="wide", page_title="Ecosystem_Management_Simulation")
 
+# hide the made with streamlit
+hide_streamlit_style = """
+            <style>
+            footer {visibility: hidden;}
+            </style>
+            """
+st.markdown(hide_streamlit_style, unsafe_allow_html=True) 
+
+
+hide_streamlit_badge = """
+                        <style>
+                            .viewerBadge_link__1S137 {visibility: hidden;}
+                        </style>
+                        """
+st.markdown(hide_streamlit_badge, unsafe_allow_html=True)
 # remove the top padding
 st.markdown(
             f'''
             <style>
                 .css-z5fcl4 {{
-                    padding-top: {1}rem;
+                    padding-top: {0}rem;
                 }}
             </style>
             ''',unsafe_allow_html=True)
@@ -68,13 +83,7 @@ no_sidebar_style = """
 """
 st.markdown(no_sidebar_style, unsafe_allow_html=True)
 
-# hide the made with streamlit
-hide_streamlit_style = """
-            <style>
-            footer {visibility: hidden;}
-            </style>
-            """
-st.markdown(hide_streamlit_style, unsafe_allow_html=True) 
+
 
 # login authentication
 name, authentication_status, username = authenticator.login('Login', 'main')
