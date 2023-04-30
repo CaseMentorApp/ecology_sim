@@ -41,7 +41,7 @@ st.set_page_config(layout="wide", page_title="Ecosystem_Management_Simulation")
 hide_streamlit_style = """
             <style>
             footer {visibility: hidden;}
-            header {visibility: hidden;}
+            #MainMenu {visibility: hidden;}
             </style>
             """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True) 
