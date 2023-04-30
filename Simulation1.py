@@ -41,18 +41,12 @@ st.set_page_config(layout="wide", page_title="Ecosystem_Management_Simulation")
 hide_streamlit_style = """
             <style>
             footer {visibility: hidden;}
-            #MainMenu {display: none;}
             </style>
             """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True) 
 
 
-hide_streamlit_badge = """
-                        <style>
-                        .viewerBadge_container__1QSob {display: none;}
-                        </style>
-                        """
-st.markdown(hide_streamlit_badge, unsafe_allow_html=True)
+
 # remove the top padding
 st.markdown(
             f'''
