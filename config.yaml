@@ -12,6 +12,10 @@ credentials:
       email: random@gmail.com
       name: CaseMentor3073
       password: $2b$12$ReTRLfDFnTk/cgrL1PB63ORMID5ANMM3W6418WKQZjkepHEbvFWA2
+    password_hasher:
+      email: password@gmail.com
+      name: password_hasher
+      password: $2b$12$/p3teKg7CxIG0I/6LM/T2ubUz5/F8H3sX9IItahR10qFdlcEmryj.
 preauthorized:
   emails:
   - mail@gmail.com
