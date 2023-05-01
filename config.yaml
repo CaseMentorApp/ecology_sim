@@ -16,6 +16,10 @@ credentials:
       email: password@gmail.com
       name: password_hasher
       password: $2b$12$/p3teKg7CxIG0I/6LM/T2ubUz5/F8H3sX9IItahR10qFdlcEmryj.
+    Test:  
+      email: test123@gmail.com
+      name: Test123
+      password: $2b$12$Rz68TjmJG98xSZ5mZGzj0uIRPLmYykiYt/uIOdeIxZa5Pr5//vwOO
 preauthorized:
   emails:
   - mail@gmail.com
