@@ -16,6 +16,7 @@ from datetime import datetime
 from streamlit_extras.switch_page_button import switch_page
 
 
+
 # defining the modal a component that is responsible for popup messages
 modal = Modal(key="Demo Key",title="Is the Ecosystem Sustainable?")
 
@@ -82,8 +83,13 @@ st.markdown(no_sidebar_style, unsafe_allow_html=True)
 
 # login authentication
 name, authentication_status, username = authenticator.login('Login', 'main')
-if authentication_status:
-
+if username == 'password_hasher':
+        unhashed_password = st.text_input('password')
+        hashed_passwords = stauth.Hasher([unhashed_password]).generate()
+        st.write(hashed_passwords)
+        authenticator.logout('Log Out','main')
+ 
+elif authentication_status and username != 'password_hasher':
     #styling the buttons
     # style for the buttons in general
     button_style = st.markdown("""
