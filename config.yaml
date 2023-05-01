@@ -15,7 +15,7 @@ credentials:
     Test:
       email: random@gmail.com
       name: Test123
-      password: $2b$12$Rz68TjmJG98xSZ5mZGzj0uIRPLmYykiYt/uIOdeIxZa5Pr5//vwOO
+      password: $2b$12$t9e4us3fRWlalKFsooZZi.znLYVcUV92r3atnj6ApQq5eXOg..qPa
     password_hasher:
       email: password@gmail.com
       name: password_hasher
