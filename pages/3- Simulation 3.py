@@ -283,7 +283,7 @@ if authentication_status:
 
     # show each species selected and add a delete button, if the del button is pressed the species is removed from the list
         for i in range(8):
-                col3, col4 = st.columns([2,1])
+                col3, col4 = st.columns([2,1.2])
                 with col4:
                     if st.button('Del', key = str(i) + "del"):
                         st.session_state.list3.remove(st.session_state.list3[i])
