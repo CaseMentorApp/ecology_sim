@@ -154,7 +154,7 @@ if authentication_status:
 
                 
     # define two columns to split the main container
-    left, right = st.columns([3.5,1])
+    left, right = st.columns([3.5,1], gap='large')
 
     #writing the headlins and instructions
     with left:  
