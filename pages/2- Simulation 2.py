@@ -300,20 +300,20 @@ if authentication_status:
         if submit:
             if parameters[0] == "--":
                 with incomplete.container():
-                    st.markdown('Please make sure you have selected 8 species and the corresponding environmental conditions.')
+                    st.markdown('Please make sure you have selected 8 species and the corresponding environmental conditions (includes selecting 4 relevant conditions in the top-right menu).')
             elif ((parameters[0] == "--") | (parameters[1] == "--") | (parameters[2] == "--") | (parameters[3] == "--")):
                 with incomplete.container():
-                    st.markdown('Please make sure you have selected 8 species and the corresponding environmental conditions.')
+                    st.markdown('Please make sure you have selected 8 species and the corresponding environmental conditions (includes selecting 4 relevant conditions in the top-right menu).')
             elif len(st.session_state.list2) < 8:
                 with incomplete.container():
-                    st.markdown('Please make sure you have selected 8 species and the corresponding environmental conditions.')
+                    st.markdown('Please make sure you have selected 8 species and the corresponding environmental conditions (includes selecting 4 relevant conditions in the top-right menu).')
             elif ((check_if_equal(st.session_state.list2,True_species1)) | (check_if_equal(st.session_state.list2,True_species2))) & (altitude & temp & wind & ph):
                 with success.container():
                     st.markdown('Your ecosystem is sustainable.')
                     st.balloons()
             else:
                 with no_sus.container():
-                    st.markdown('Please check your species and environmental conditions, then try again') 
+                    st.markdown('Please check your species and environmental conditions, then try again.') 
                 
 elif authentication_status == False:
     st.error('Username/password is incorrect')
