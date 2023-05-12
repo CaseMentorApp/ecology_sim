@@ -274,15 +274,15 @@ if authentication_status:
                 col3, col4 = st.columns([2,1.2])
                 with col4:
                     if st.button('Del', key = str(i) + "del"):
-                        if i < len(st.session_state.list):
-                            st.session_state.list.remove(st.session_state.list[i])
+                        if i < len(st.session_state.list2):
+                            st.session_state.list2.remove(st.session_state.list2[i])
                 with col3:
                     try:
-                        st.markdown(st.session_state.list[i])
+                        st.markdown(st.session_state.list2[i])
                     except IndexError:
                         continue
         with selected:
-            Selected = st.markdown("<h5 style='text-align: left; color: grey;'>Selected Species " + str(len(st.session_state.list)) + "/8</h5>", unsafe_allow_html=True)
+            Selected = st.markdown("<h5 style='text-align: left; color: grey;'>Selected Species " + str(len(st.session_state.list2)) + "/8</h5>", unsafe_allow_html=True)
         st.markdown('---')
         if st.checkbox('Log Out'):
                 st.error('Are you sure you would like to Log Out?')
