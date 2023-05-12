@@ -265,21 +265,24 @@ if authentication_status:
 
 
     # creating a header of Selected species with a count out of eight
+    # creating a header of Selected species with a count out of eight
     with right:
-        st.markdown("<h5 style='text-align: left; color: grey;'>Selected Species " + str(len(st.session_state.list2)) + "/8</h5>", unsafe_allow_html=True)
+        selected = st.container()
 
     # show each species selected and add a delete button, if the del button is pressed the species is removed from the list
         for i in range(8):
                 col3, col4 = st.columns([2,1.2])
                 with col4:
                     if st.button('Del', key = str(i) + "del"):
-                        st.session_state.list2.remove(st.session_state.list2[i])
+                        if i < len(st.session_state.list):
+                            st.session_state.list.remove(st.session_state.list[i])
                 with col3:
                     try:
-                        st.markdown(st.session_state.list2[i])
+                        st.markdown(st.session_state.list[i])
                     except IndexError:
                         continue
-
+        with selected:
+            Selected = st.markdown("<h5 style='text-align: left; color: grey;'>Selected Species " + str(len(st.session_state.list)) + "/8</h5>", unsafe_allow_html=True)
         st.markdown('---')
         if st.checkbox('Log Out'):
                 st.error('Are you sure you would like to Log Out?')
@@ -300,20 +303,20 @@ if authentication_status:
         if submit:
             if parameters[0] == "--":
                 with incomplete.container():
-                    st.markdown('Please make sure you have selected 8 species and the corresponding environmental conditions (includes selecting 4 relevant conditions in the top-right menu).')
+                    st.markdown('Please make sure you have selected 8 species and the corresponding environmental conditions.')
             elif ((parameters[0] == "--") | (parameters[1] == "--") | (parameters[2] == "--") | (parameters[3] == "--")):
                 with incomplete.container():
-                    st.markdown('Please make sure you have selected 8 species and the corresponding environmental conditions (includes selecting 4 relevant conditions in the top-right menu).')
+                    st.markdown('Please make sure you have selected 8 species and the corresponding environmental conditions.')
             elif len(st.session_state.list2) < 8:
                 with incomplete.container():
-                    st.markdown('Please make sure you have selected 8 species and the corresponding environmental conditions (includes selecting 4 relevant conditions in the top-right menu).')
+                    st.markdown('Please make sure you have selected 8 species and the corresponding environmental conditions.')
             elif ((check_if_equal(st.session_state.list2,True_species1)) | (check_if_equal(st.session_state.list2,True_species2))) & (altitude & temp & wind & ph):
                 with success.container():
                     st.markdown('Your ecosystem is sustainable.')
                     st.balloons()
             else:
                 with no_sus.container():
-                    st.markdown('Please check your species and environmental conditions, then try again.') 
+                    st.markdown('Please check your species and environmental conditions, then try again') 
                 
 elif authentication_status == False:
     st.error('Username/password is incorrect')
