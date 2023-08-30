@@ -211,8 +211,16 @@ if authentication_status:
     ]
 
     # list 2 of the right species to choose
-    True_species2 = True_species1
+    True_species2 = ['Stalked Kelp',
+    'Thin Leaf Lettuce',
+    'Yellow Tube Sponge',
+    'Lion Fish',
+    'Reef Shark',
+    'Sea Turtle',
+    'Jellyfish',
+    'Clown Fish'
 
+    ]
     # the optimal conditions, first is min second is max
     optimal_alt =[1001,1400]
     optimal_temp =[26,27.9]
