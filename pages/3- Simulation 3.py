@@ -258,7 +258,7 @@ if authentication_status:
             
             # taking the parameters from the clicked image into the conditions part, limiting the condtions view to only 4 at a time
         with col_top_right:
-            col_lst = ["Elevation:","Temperature","Wind Speed:","Soil PH:","Air Pressure:","Cloud Height:","Sunlight Hours:"]
+            col_lst = ["Elevation:","Temperature:","Wind Speed:","Soil PH:","Air Pressure:","Cloud Height:","Sunlight Hours:"]
             parameters = [str(for_refrence['alt'][clicked]) if clicked > -1 and check_alt and (sum(check_list) <= 4) else "--",
                     str(for_refrence['temp'][clicked]) if clicked > -1 and check_temp and (sum(check_list) <= 4) else "--",
                     str(for_refrence['wind'][clicked]) if clicked > -1 and check_wind and (sum(check_list) <= 4) else "--",
