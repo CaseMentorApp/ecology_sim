@@ -185,7 +185,7 @@ if authentication_status:
         clicked = clickable_images(
         st.session_state['real_img_list2'],
             titles=["Depth:" + str(for_refrence['alt'][i]) +
-                    "\n" + "Temperture:" + str(for_refrence['temp'][i]) +
+                    "\n" + "Temperature:" + str(for_refrence['temp'][i]) +
                     "\n" + "Wind:" + str(for_refrence['wind'][i]) +
                     "\n" + "Salinity:" + str(for_refrence['ph'][i]) +
                     "\n" + "Clarity:" + str(for_refrence['pressure'][i]) +                  
@@ -253,7 +253,7 @@ if authentication_status:
             
             # taking the parameters from the clicked image into the conditions part, limiting the condtions view to only 4 at a time
         with col_top_right:
-            col_lst = ["Depth:","Tempeture:","Wind:","Salinity:","Clarity:","Oxygen:","Current:"]
+            col_lst = ["Depth:","Temperature:","Wind:","Salinity:","Clarity:","Oxygen:","Current:"]
             parameters = [str(for_refrence['alt'][clicked]) if clicked > -1 and check_alt and (sum(check_list) <= 4) else "--",
                     str(for_refrence['temp'][clicked]) if clicked > -1 and check_temp and (sum(check_list) <= 4) else "--",
                     str(for_refrence['wind'][clicked]) if clicked > -1 and check_wind and (sum(check_list) <= 4) else "--",
