@@ -341,11 +341,11 @@ with open('config.yaml') as file:
                 with no_sus.container():
                     st.markdown('Please check your species and environmental conditions, then try again') 
                 
-elif authentication_status == False:
-    st.error('Username/password is incorrect')
+#elif authentication_status == False:
+   # st.error('Username/password is incorrect')
 
-elif authentication_status == None:
-    st.warning('Please enter your username and password')
+#elif authentication_status == None:
+    #st.warning('Please enter your username and password')
 
 
 # hide the made with streamlit
